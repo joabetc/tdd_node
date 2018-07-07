@@ -1,3 +1,5 @@
+require('co-mocha');
+
 describe('user data', function() {
   it('should have +1 user count after saving', function* () {
     var users = yield data.users.get();
