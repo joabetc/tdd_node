@@ -2,6 +2,7 @@ require('co-mocha');
 var should = require('should');
 var data = require('../user-data.js');
 var fs = require('co-fs');
+var request = require('co-supertest');
 
 before(function *() {
   yield fs.writeFile('./users.json', '[]');
@@ -27,7 +28,7 @@ describe('user web', function() {
 
     yield data.users.save({ name: 'John' });
 
-    var data = yield request.get('/user').expect(200).end();
+    var newData = yield request.get('/user').expect(200).end();
     var newUsers = newData.body;
 
     newUsers.length.should.equal(users.length + 1);
