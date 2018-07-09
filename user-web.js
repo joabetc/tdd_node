@@ -10,3 +10,5 @@ router.get('/user', function* () {
 });
 
 app.use(router.routes());
+
+app.listen(3000);
