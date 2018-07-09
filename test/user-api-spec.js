@@ -23,14 +23,11 @@ describe('user data', function() {
 
 describe('user web', function() {
   it('should have +1 user count after saving', function* () {
-    var res = yield request.get('/user').expect(200).end();
-
-    var users = data.body;
+    var users = (yield request.get('/user').expect(200).end()).body;
 
     yield data.users.save({ name: 'John' });
 
-    var newRes = yield request.get('/user').expect(200).end();
-    var newUsers = newRes.body;
+    var newUsers = (yield request.get('/user').expect(200).end()).body;
 
     newUsers.length.should.equal(users.length + 1);
   });
